@@ -24,5 +24,11 @@ Neste desafio analítico, você terá a oportunidade de realizar uma investigaç
 - Na primeira semana após um cliente se juntar ao programa (incluindo a data de adesão), eles ganham 2x pontos em todos os itens, não apenas sushi — quantos pontos os clientes A e B têm no final de janeiro?
 
 
+Clique aqui para **[acessar](https://medium.com/@viitoriaraujoo/case-study-sql-dannys-diner-49788bda255e)** meu post sobre declaração do problema e os conjuntos de dados utilizados no desafio.
+
+
+
+
+
 
 
