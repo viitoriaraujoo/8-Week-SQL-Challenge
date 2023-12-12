@@ -1,4 +1,5 @@
 # 8-Week-SQL-Challenge 🎲
+![Logo do Projeto](https://8weeksqlchallenge.com/images/8-week-sql-challenge.png)
 
 Este repositório contém as soluções para os estudos de caso no 8WeekSQLChallenge.
 O Desafio SQL de 8 Semanas foi iniciado por Danny Ma por meio do programa de aprendizado virtual de dados chamado Data With Danny, que consiste em 8 desafios SQL diferentes.
