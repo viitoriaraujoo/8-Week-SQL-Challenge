@@ -12,8 +12,10 @@ Cada pasta de estudo de caso contém os seguintes arquivos:
 
 # Sobre o desafio
 O 8WeekSQLChallenge foi um desafio cativante e educacional projetado para aprimorar minhas habilidades em SQL ao longo de oito semanas. Durante esse período, você enfrento uma série de estudos de caso práticos, cada um representando desafios do mundo real que ajudarão a solidificar meus conhecimentos em consultas SQL.
-* 🍜Case Study #1 - Danny's Diner
-* 🍕Case Study #2 - Pizza Runner
+
+🍜**Case Study #1 - Danny's Diner**
+
+🍕**Case Study #2 - Pizza Runner**
 
 # Insights dos Estudos
 - SQL
