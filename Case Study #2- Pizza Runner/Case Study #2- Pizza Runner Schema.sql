@@ -3,7 +3,7 @@ DROP SCHEMA pizza_runner;
 CREATE SCHEMA pizza_runner;
 USE pizza_runner;
 
--- The runners table shows the registration_date for each new runner
+-- A tabela dos entregadores (runners) exibe a data de registro (registration_date) para cada novo entregador.
 DROP TABLE IF EXISTS runners;
 CREATE TABLE runners (
   runner_id INTEGER,
@@ -17,7 +17,7 @@ VALUES
   (3, '2021-01-08'),
   (4, '2021-01-15');
 
--- Customer pizza orders are captured in the customer_orders table with 1 row for each individual pizza that is part of the order.
+-- Os pedidos de pizza dos clientes são registrados na tabela customer_orders, com uma linha para cada pizza individual que faz parte do pedido.
 DROP TABLE IF EXISTS customer_orders;
 CREATE TABLE customer_orders (
   order_id INTEGER,
@@ -47,7 +47,7 @@ VALUES
   ('10', '104', '1', 'null', 'null', '2020-01-11 18:34:49'),
   ('10', '104', '1', '2, 6', '1, 4', '2020-01-11 18:34:49');
   
-  -- After each orders are received through the system - they are assigned to a runner - however not all orders are fully completed and can be cancelled by the restaurant or the customer.
+  -- Após cada pedido ser recebido pelo sistema, ele é atribuído a um entregador; no entanto, nem todos os pedidos são totalmente concluídos e podem ser cancelados pelo restaurante ou pelo cliente.
   DROP TABLE IF EXISTS runner_orders;
 CREATE TABLE runner_orders (
   order_id INTEGER,
@@ -72,7 +72,7 @@ VALUES
   ('9', '2', 'null', 'null', 'null', 'Customer Cancellation'),
   ('10', '1', '2020-01-11 18:50:20', '10km', '10minutes', 'null');
 
--- Pizza Runner only has 2 pizzas available the Meat Lovers or Vegetarian!
+-- O Pizza Runner tem apenas 2 pizzas disponíveis: a Meat Lovers (Amantes de Carne) ou a Vegetariana!
 DROP TABLE IF EXISTS pizza_names;
 CREATE TABLE pizza_names (
   pizza_id INTEGER,
@@ -84,7 +84,7 @@ VALUES
   (1, 'Meatlovers'),
   (2, 'Vegetarian');
 
--- Each pizza_id has a standard set of toppings which are used as part of the pizza recipe.
+-- Cada pizza_id possui um conjunto padrão de ingredientes que são usados como parte da receita da pizza.
 DROP TABLE IF EXISTS pizza_recipes;
 CREATE TABLE pizza_recipes (
   pizza_id INTEGER,
@@ -96,7 +96,7 @@ VALUES
   (1, '1, 2, 3, 4, 5, 6, 8, 10'),
   (2, '4, 6, 7, 9, 11, 12');
 
--- table contains all of the topping_name values with their corresponding topping_id value
+-- A tabela contém todos os valores de topping_name com seus respectivos valores de topping_id.
 DROP TABLE IF EXISTS pizza_toppings;
 CREATE TABLE pizza_toppings (
   topping_id INTEGER,
@@ -117,3 +117,63 @@ VALUES
   (10, 'Salami'),
   (11, 'Tomatoes'),
   (12, 'Tomato Sauce');
+
+
+  -- Criar uma tabela temporaria com um nome diferente
+SELECT order_id, customer_id, pizza_id, 
+       CASE 
+          WHEN exclusions IS NULL OR exclusions LIKE 'null' THEN ' '
+          ELSE exclusions
+       END AS exclusions,
+       CASE 
+          WHEN extras IS NULL OR extras LIKE 'null' THEN ' '
+          ELSE extras 
+       END AS extras, 
+       order_time
+INTO TEMPORARY TABLE temp_customer_orders
+FROM customer_orders;
+
+-- Dropa o nome original da tabela
+DROP TABLE IF EXISTS customer_orders;
+
+-- Renomear o nome da tabela temporaria
+ALTER TABLE temp_customer_orders RENAME TO customer_orders;
+
+select * from runner_orders
+-- Limpeza e transformação de dados da tabela runner_orders criando uma tabela temporaria
+CREATE TEMP TABLE runner_orders_temp AS
+ SELECT 
+   order_id, 
+   runner_id, 
+   CASE
+     WHEN pickup_time = 'null' THEN NULL
+     ELSE TO_TIMESTAMP(pickup_time, 'YYYY-MM-DD HH24:MI:SS') -- Adapte o formato conforme necessário
+   END AS pickup_time,
+   CASE
+     WHEN distance = 'null' THEN NULL
+     WHEN distance LIKE '%km' THEN TRIM('km' from distance)
+     ELSE distance 
+   END AS distance,
+   CASE
+     WHEN duration = 'null' THEN NULL
+     WHEN duration LIKE '%mins' THEN TRIM('mins' from duration)
+     WHEN duration LIKE '%minute' THEN TRIM('minute' from duration)
+     WHEN duration LIKE '%minutes' THEN TRIM('minutes' from duration)
+     ELSE duration
+   END AS duration,
+   CASE
+     WHEN cancellation IS NULL or cancellation = 'null' THEN ''
+     ELSE cancellation
+   END AS cancellation
+  FROM runner_orders;
+
+DROP TABLE IF EXISTS runner_orders;
+
+ALTER TABLE runner_orders_temp RENAME TO runner_orders;
+
+--Conversão do tipo de dados
+ALTER TABLE runner_orders
+ALTER COLUMN pickup_time TYPE timestamp USING pickup_time::timestamp without time zone, 
+ALTER COLUMN distance TYPE numeric USING distance::numeric,
+ALTER COLUMN duration TYPE integer USING duration::integer;
+
