@@ -19,7 +19,7 @@ WHERE s.customer_id IN (1,2,4,5,6,7,8)-- seleção de apenas 8 clientes
 
 A partir dos dados filtrados irei analisar as atividades dos quatro primeiros clientes correspondentes ao customer_id.
 
-- Customer 1 começa com um plano de teste gratuito em 01/08/2020 e quando o teste termina, atualiza para um plano mensal básico em 08/08/2020.
-- Customer 2 começa com um plano de teste gratuito em 20/09/2020 e quando o teste termina, atualiza para um plano pro anual em 27/08/2020.
-- Customer 4 começa com um plano de teste gratuito em 17/01/2020 e quando o teste termina, atualiza para um plano mensal básico em 24/01/2020. No dia 21/04/2020, o cliente decide encerrar o plano.
-- Customer 5 começa com um plano de teste gratuito em 03/08/2020 e quando o teste termina, atualiza para um plano mensal básico em 10/08/2020.
+*- Customer 1 começa com um plano de teste gratuito em 01/08/2020 e quando o teste termina, atualiza para um plano mensal básico em 08/08/2020.*
+*- Customer 2 começa com um plano de teste gratuito em 20/09/2020 e quando o teste termina, atualiza para um plano pro anual em 27/08/2020.*
+*- Customer 4 começa com um plano de teste gratuito em 17/01/2020 e quando o teste termina, atualiza para um plano mensal básico em 24/01/2020. No dia 21/04/2020, o cliente decide encerrar o plano.*
+*- Customer 5 começa com um plano de teste gratuito em 03/08/2020 e quando o teste termina, atualiza para um plano mensal básico em 10/08/2020.*
