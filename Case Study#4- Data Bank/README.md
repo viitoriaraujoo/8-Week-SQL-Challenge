@@ -26,12 +26,27 @@ A equipe do Data Bank elaborou um modelo de dados específico para este estudo d
 
 Danny compartilhou o design de dados do Data Bank e também descrições curtas em cada uma das tabelas do banco de dados — nosso estudo de caso se concentra em apenas 3 tabelas:
 
-**1- `Regiões`:** A tabela de regiões nos fornece o `region_id` e seu respectivo nome correspodente com o `region_name`.
+**1- Regions:** A tabela de regiões nos fornece o region_id e seu respectivo nome correspodente com o region_name.
 <p align="center">
     <img src="https://user-images.githubusercontent.com/81607668/130551759-28cb434f-5cae-4832-a35f-0e2ce14c8811.png" alt="Imagem Centralizada">
 </p>
 <h3 align="center">Tabela 1: Regions </h3>
 
+**2- Customer Nodes:** Os clientes são distribuídos aleatoriamente entre os nós de acordo com sua região - isso também especifica exatamente qual nó contém tanto seu dinheiro quanto seus dados. Cada "nó" pode ser conceituado como uma entidade central no sistema, representando um ponto específico onde tanto o dinheiro quanto os dados de um cliente são armazenados.  
+Essa distribuição aleatória muda frequentemente para reduzir o risco de hackers acessarem o sistema do Data Bank e roubar o dinheiro e dados dos clientes!
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/81607668/130551806-90a22446-4133-45b5-927c-b5dd918f1fa5.png" 
+    alt="Imagem Centralizada">
+</p>
+<h3 align="center">Tabela 2: Customer Nodes </h3>
+
+**3- Customer Transactions:** Essa tabela armazena todos os depósitos, saques e compras feitas pelos clientes usando seus cartões de débito Data Bank.
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/81607668/130551879-2d6dfc1f-bb74-4ef0-aed6-42c831281760.png" 
+    alt="Imagem Centralizada">
+</p>
+<h3 align="center">Tabela 3: Customer Transactions </h3>
 
 # 4. ANÁLISE DOS DADOS
 Essa análise será conduzida através do pgAdmin4 SQL, uma poderosa ferramenta de gerenciamento de banco de dados PostgreSQL que permite manipular dados de forma eficiente por meio da linguagem SQL.
@@ -44,7 +59,4 @@ As seguintes perguntas de estudo de caso incluem algumas análises gerais de exp
 
 # 5. CONCLUSÕES
 
-# 6. OBJETIVOS DE APRENDIZADO
-
-
-
+# 6. OBJETIVOS DE APRENDIZADO
