@@ -17,6 +17,10 @@ O 8WeekSQLChallenge foi um desafio cativante e educacional projetado para aprimo
 
 🍕**Case Study #2 - Pizza Runner**
 
+🥑**Case Study #3 Food-Fi**
+
+🏦💰 **Case Study #4 Data Bank**
+
 # Insights dos Estudos
 - SQL
 - Modelagem de Dados
