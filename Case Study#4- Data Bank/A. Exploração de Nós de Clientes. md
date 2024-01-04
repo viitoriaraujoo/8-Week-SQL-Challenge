@@ -1,0 +1,45 @@
+# <p align="center" style="margin-top: 0px;"> 🏦Case Study #4 Data Bank💰 
+## <p align="center"> A. Jornada do Cliente
+
+*Quantos nós exclusivos (uniques nodes) existem no sistema do Data Bank*
+Select COUNT(DISTINCT node_id) AS unique_nodes 
+FROM customer_nodes
+
+--Qual é o número de nós por região?
+SELECT r.region_name, 
+	COUNT(DISTINCT c.node_id) AS unique_nodes,
+	COUNT (c.node_id) AS nodes_regions 
+	FROM customer_nodes c
+	LEFT JOIN regions r ON c.region_id = r.region_id
+	GROUP BY r.region_name;
+
+--Quantos clientes são alocados para cada região?
+SELECT r.region_name, 
+    COUNT(DISTINCT c.customer_id) AS total_customer
+FROM customer_nodes c
+LEFT JOIN regions r ON c.region_id = r.region_id
+GROUP BY r.region_name
+ORDER BY total_customer DESC
+
+--Em média, quantos dias os clientes são realocados para um nó diferente?
+SELECT 
+    ROUND(AVG(EXTRACT(EPOCH FROM (end_date::timestamp - start_date::timestamp)) / 86400)) AS media_dias_realocacao
+FROM customer_nodes
+WHERE end_date != '9999-12-31';		--the result shows there is an abnormal date which is '9999-12-31' needs to be excluded from the query
+
+--Qual é a mediana, o percentil 80 e o percentil 95 para essa mesma métrica de dias de realocação para cada região?
+WITH regiao_dias_realocacao AS (
+    SELECT 
+        r.region_name,
+        EXTRACT(EPOCH FROM (c.end_date::timestamp - c.start_date::timestamp)) / 86400 AS dias_realocacao
+    FROM customer_nodes c
+    LEFT JOIN regions r ON c.region_id = r.region_id
+    WHERE c.end_date != '9999-12-31'
+)
+SELECT 
+    region_name,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY dias_realocacao) AS mediana,
+    PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY dias_realocacao) AS percentil_80,
+    PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY dias_realocacao) AS percentil_95
+FROM regiao_dias_realocacao
+GROUP BY region_name;
