@@ -140,8 +140,4 @@ FROM cte;
 |3|4|April|-729
 |4|1|January|848
 ***
-**5. Qual é a porcentagem de clientes que aumentam seu saldo final em mais de 5%?**
-```sql
-```
-**Resposta:**
-***
+
