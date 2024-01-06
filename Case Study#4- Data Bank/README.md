@@ -57,6 +57,5 @@ As seguintes perguntas de estudo de caso incluem algumas análises gerais de exp
 - Desafio de Alocação de Dados.
 - Extra Challenge.
 
-# 5. CONCLUSÕES
 
-# 6. OBJETIVOS DE APRENDIZADO
+
